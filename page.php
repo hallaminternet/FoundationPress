@@ -1,31 +1,27 @@
 <?php
 /**
- * The template for displaying pages
+ * The template for displaying all pages.
  *
  * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages and that
- * other "pages" on your WordPress site will use a different template.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
  *
- * @package FoundationPress
- * @since FoundationPress 1.0.0
+ * To generate specific templates for your pages you can use:
+ * /mytheme/views/page-mypage.twig
+ * (which will still route through this PHP file)
+ * OR
+ * /mytheme/page-mypage.php
+ * (in which case you'll want to duplicate this file and save to the above path)
+ *
+ * Methods for TimberHelper can be found in the /lib sub-directory
+ *
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since    Timber 0.1
  */
 
-get_header(); ?>
-
-<?php get_template_part( 'template-parts/featured-image' ); ?>
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content">
-			<?php
-			while ( have_posts() ) :
-				the_post();
-?>
-				<?php get_template_part( 'template-parts/content', 'page' ); ?>
-				<?php comments_template(); ?>
-			<?php endwhile; ?>
-		</main>
-		<?php get_sidebar(); ?>
-	</div>
-</div>
-<?php
-get_footer();
+$context = Timber::get_context();
+$post = new TimberPost();
+$context['post'] = $post;
+Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
