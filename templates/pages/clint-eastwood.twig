@@ -1,0 +1,100 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+	<div class="content-wrapper">
+		
+		<article class="clint" id="post-{{post.ID}}">
+
+			<section class="article-content">
+	
+				<h1 class="clint-title">Clint Eastwood</h1>
+
+				<h2 class="clint-dates">
+						<b>
+						{% if not clint.date_of_death %}
+							Born:
+						{% endif %}
+						{{clint.date_of_birth}}
+						{% if clint.date_of_death %}
+							&#151; {{ clint.date_of_death }}
+						{% endif %}
+						</b>
+					({{clint.age}})
+
+				</h2>
+
+	
+				<div class="clint-bio">
+					{{post.content}}
+				</div>
+
+
+				<div class="clint-quotes">
+
+					<h2>
+						Clint&#8217;s Best Quotes
+					</h2>
+
+					{% for quote in clint.quotes %}
+
+						<div class="clint-quote">
+							<div class="clint-quote__content">
+								{{ quote.content }} 
+							</div>
+							{% if quote.label %}
+								<div class="clint-quote__label">
+									{{ quote.label }}
+								</div>
+							{% endif %}
+						</div>
+
+					{% endfor %}
+
+				</div>
+	
+			</section>
+		
+		</article>
+
+	</div><!-- /content-wrapper -->
+
+
+	<style>
+		.clint {
+			padding: 1em 0px 6em 0px;
+		}
+		.clint-title {
+			font-size: 3em;
+			margin-bottom: 1em;
+		}
+		h2 {
+			font-size: 1.5em;
+			margin-bottom: 2em;
+		}
+		h2.clint-dates {
+			font-weight: normal;
+		}
+		.clint-bio {
+			margin-bottom: 2em;
+		}
+		.clint-quotes h2 {
+			margin-bottom: 1em;
+		}
+		.clint-quote {
+			margin-bottom: 2em;
+		}
+		.clint-quote__content {
+			font-size: 1.2em;
+			margin-bottom: 0.5em;
+		}
+		.clint-quote__label {
+			font-size: 0.9em;
+			font-weight: bold;
+			padding-left: 0.5em;
+			border-left: 5px solid black;
+		}
+	</style>
+
+
+{% endblock %}
