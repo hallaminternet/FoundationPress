@@ -20,7 +20,7 @@ $timber = new Timber\Timber();
 
 Timber::$locations = array(
 	ABSPATH.'/pattern-library/source/_patterns',
-	ABSPATH.'/wp-content/templates'
+	get_template_directory() . '/templates'
 );
 
 /** Various clean up functions */
