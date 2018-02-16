@@ -1,9 +1,9 @@
 <?php
 /*
-Template Name: Potato
+Template Name: Test
 */
 
 $context = Timber::get_context();
 $post = new TimberPost();
 $context['post'] = $post;
-Timber::render('/templates/potato.twig',$context);
+Timber::render('/templates/test.twig',$context);
