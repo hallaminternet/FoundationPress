@@ -1,5 +1,9 @@
-{% extends "templates/base.twig" %}
+{% extends "base.twig" %}
 
 {% block content %}
-<p>{{ post.Name }}</p>
+    <h1>{{ page.Name }}</h1>
+    {% for post in posts %}
+        <a href="{{ post.link }}"><h2>Post Title: {{ post.Title }}</h2></a>
+        <div class="content">{{ post.Content }}</div>
+    {% endfor %}
 {% endblock %}
