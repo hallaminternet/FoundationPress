@@ -14,8 +14,14 @@
  * @since FoundationPress 1.0.0
  */
 
+/** Timber config */
 require_once( __DIR__ . '/vendor/autoload.php' );
 $timber = new Timber\Timber();
+
+Timber::$locations = array(
+	ABSPATH.'/pattern-library/source/_patterns',
+	ABSPATH.'/wp-content/templates'
+);
 
 /** Various clean up functions */
 require_once( 'library/cleanup.php' );
