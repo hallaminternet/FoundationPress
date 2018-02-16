@@ -73,7 +73,7 @@ UTILITIES
 // 'pre' helper with optional class
 function pre( $content, $class = false ) {
 	echo '<pre class="' . $class . '">';
-		echo $content;
+		print_r($content);
 	echo '</pre>';
 	echo '<hr/>';
 }
