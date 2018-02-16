@@ -62,3 +62,20 @@ require_once( 'library/responsive-images.php' );
 
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
+
+
+
+/*
+UTILITIES
+*/
+
+
+// 'pre' helper with optional class
+function pre( $content, $class = false ) {
+	echo '<pre class="' . $class . '">';
+		echo $content;
+	echo '</pre>';
+	echo '<hr/>';
+}
+
+
