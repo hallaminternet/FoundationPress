@@ -1,24 +1,20 @@
 <?php
 /**
- * The template for displaying all single posts and attachments
+ * The Template for displaying all single posts
  *
- * @package FoundationPress
- * @since FoundationPress 1.0.0
+ * Methods for TimberHelper can be found in the /lib sub-directory
+ *
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since    Timber 0.1
  */
 
-get_header(); ?>
+$context = Timber::get_context();
+$post = Timber::query_post();
+$context['post'] = $post;
 
-<?php get_template_part( 'template-parts/featured-image' ); ?>
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content">
-			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'template-parts/content', '' ); ?>
-				<?php the_post_navigation(); ?>
-				<?php comments_template(); ?>
-			<?php endwhile; ?>
-		</main>
-		<?php get_sidebar(); ?>
-	</div>
-</div>
-<?php get_footer();
+if ( post_password_required( $post->ID ) ) {
+	Timber::render( 'single-password.twig', $context );
+} else {
+	Timber::render( array( 'single-' . $post->ID . '.twig', 'single-' . $post->post_type . '.twig', 'single.twig' ), $context );
+}

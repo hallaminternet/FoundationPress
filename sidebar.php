@@ -1,12 +1,10 @@
 <?php
 /**
- * The sidebar containing the main widget area
+ * The Template for the sidebar containing the main widget area
  *
- * @package FoundationPress
- * @since FoundationPress 1.0.0
+ *
+ * @package  WordPress
+ * @subpackage  Timber
  */
 
-?>
-<aside class="sidebar">
-	<?php dynamic_sidebar( 'sidebar-widgets' ); ?>
-</aside>
+Timber::render( array( 'sidebar.twig' ), $data );

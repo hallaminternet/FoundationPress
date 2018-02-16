@@ -1,53 +1,40 @@
 <?php
 /**
- * The template for displaying archive pages
+ * The template for displaying Archive pages.
  *
  * Used to display archive-type pages if nothing more specific matches a query.
  * For example, puts together date-based pages if no date.php file exists.
  *
- * If you'd like to further customize these archive views, you may create a
- * new template file for each one. For example, tag.php (Tag archives),
- * category.php (Category archives), author.php (Author archives), etc.
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * Methods for TimberHelper can be found in the /lib sub-directory
  *
- * @package FoundationPress
- * @since FoundationPress 1.0.0
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since   Timber 0.2
  */
 
-get_header(); ?>
+$templates = array( 'archive.twig', 'index.twig' );
 
-<div class="main-container">
-	<div class="main-grid">
-		<main class="main-content">
-		<?php if ( have_posts() ) : ?>
+$context = Timber::get_context();
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
-			<?php endwhile; ?>
+$context['title'] = 'Archive';
+if ( is_day() ) {
+	$context['title'] = 'Archive: '.get_the_date( 'D M Y' );
+} else if ( is_month() ) {
+	$context['title'] = 'Archive: '.get_the_date( 'M Y' );
+} else if ( is_year() ) {
+	$context['title'] = 'Archive: '.get_the_date( 'Y' );
+} else if ( is_tag() ) {
+	$context['title'] = single_tag_title( '', false );
+} else if ( is_category() ) {
+	$context['title'] = single_cat_title( '', false );
+	array_unshift( $templates, 'archive-' . get_query_var( 'cat' ) . '.twig' );
+} else if ( is_post_type_archive() ) {
+	$context['title'] = post_type_archive_title( '', false );
+	array_unshift( $templates, 'archive-' . get_post_type() . '.twig' );
+}
 
-			<?php else : ?>
-				<?php get_template_part( 'template-parts/content', 'none' ); ?>
+$context['posts'] = new Timber\PostQuery();
 
-			<?php endif; // End have_posts() check. ?>
-
-			<?php /* Display navigation to next/previous pages when applicable */ ?>
-			<?php
-			if ( function_exists( 'foundationpress_pagination' ) ) :
-				foundationpress_pagination();
-			elseif ( is_paged() ) :
-			?>
-				<nav id="post-nav">
-					<div class="post-previous"><?php next_posts_link( __( '&larr; Older posts', 'foundationpress' ) ); ?></div>
-					<div class="post-next"><?php previous_posts_link( __( 'Newer posts &rarr;', 'foundationpress' ) ); ?></div>
-				</nav>
-			<?php endif; ?>
-
-		</main>
-		<?php get_sidebar(); ?>
-
-	</div>
-</div>
-
-<?php get_footer();
+Timber::render( $templates, $context );
