@@ -2,13 +2,13 @@
 
 
 // DEV ONLY: Get pattern-library scaffolding
-//@import '../../../../../../pattern-library/source/css/pattern-scaffolding';
-
-// Get pattern-library styles
-@import '../../../../../../pattern-library/source/css/style';
-
+@import '../../../../../../../pattern-library/source/css/pattern-scaffolding';
 
 @import 'settings';
+
+// Get pattern-library styles, with our settings applied
+@import '../../../../../../../pattern-library/source/css/style';
+
 @import 'foundation';
 @import 'motion-ui';
 
