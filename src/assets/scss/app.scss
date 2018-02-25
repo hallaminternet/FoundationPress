@@ -1,6 +1,10 @@
 @charset 'utf-8';
 
 
+// Get pattern-library styles
+@import '../../../../../../pattern-library/source/css/style';
+
+
 @import 'settings';
 @import 'foundation';
 @import 'motion-ui';
